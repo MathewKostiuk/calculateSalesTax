@@ -1,13 +1,7 @@
-var resultObj = {
-  Telus: {
-
-  },
-  Bombardier: {
-
-  }
-};
+function calculateSalesTax(companySalesData, salesTaxRates) {
 
 
+var resultObj = {};
 
 var salesTaxRates = {
   AB: 0.05,
@@ -47,10 +41,31 @@ for (var k = 0; k < companySalesData.length; k++) {
 }
 console.log(companySalesData);
 
-for (var key in resultObj) {
-  if (key === companySalesData[0].name) {
-    console.log("YES");
+for (var l = 0; l < companySalesData.length; l++) {
+  var companyData = companySalesData[l];
+  var key = companyData['name'];
+
+  if(!resultObj.hasOwnProperty(key)) {
+    console.log('NO KEY');
+    resultObj[key] = { totalSales: companyData.total,
+                       totalTaxes: companyData.totalTaxes
+    };
+  } else {
+    resultObj[key].totalSales += companyData.total;
+    resultObj[key].totalTaxes += companyData.totalTaxes;
+
+    console.log('EXISTS');
   }
+
+/*
+  for (var key in resultObj) {
+    if (key === companySalesData[l].name) {
+      resultObj[key]["totalSales"] += companySalesData[l].total;
+      resultObj[key]["totalTaxes"] += companySalesData[l].totalTaxes;
+    }
+  }
+  */
 }
 
-
+console.log(resultObj);
+};
